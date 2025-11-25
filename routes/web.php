@@ -45,6 +45,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/products/{product}', [ProductController::class, 'update'])->name('products.update');
     Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 
+    // Product show route (specific route after /products/create)
+    Route::get('/products/{product}', [ProductController::class, 'show'])->where('product', '[0-9]+')->name('products.show');
+
     // Boutique management - Admin only
     Route::middleware('admin')->group(function () {
         Route::post('/boutiques', [BoutiqueController::class, 'store'])->name('boutiques.store');
